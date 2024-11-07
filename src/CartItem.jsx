@@ -6,30 +6,103 @@ import './CartItem.css';
 const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
+  const [showCart, setShowCart] = useState(false);
 
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
- 
+    let totalCost = cart.quantity * cart.cost;
+   
   };
 
   const handleContinueShopping = (e) => {
-   
+    setShowCart(false);
   };
 
-
+  const handleCheckoutShopping = (e) => {
+    alert('Functionality to be added for future reference');
+  };
 
   const handleIncrement = (item) => {
+    dispatch(updateQuantity(item.quantity));
+    if(item.quantity > 0){
+        item.quantity++;
+    }
   };
 
   const handleDecrement = (item) => {
-   
+   dispatch(updateQuantity(item.quantity));
+   if(item.quantity > 0){
+    item.quantity--;
+   }else if(item.quantity == 0){
+    dispatch(removeItem(item))
+   }
   };
 
   const handleRemove = (item) => {
+    dispatch(removeItem(item));
   };
+
+  const handleIncrementCart = (index) => {
+    dispatch(handleIncrement(index));
+  };
+
+  const handleDecrementCart = (index) => {
+    dispatch(handleDecrement(index));
+  };
+
+  const handleRemoveCartItem = index => {
+    dispatch(handleRemove(index));
+  };
+
+  const getItems = () => {
+    const items = [];
+    Items.forEach((item) => {
+        if(item.quantity > 0){
+            items.push({...item, type: "Air Purifying Plants"});
+        }else if (item.quantity > 0 && !items.some((i) => i.name === item.name && i.type === "Aromatic Fragrant Plants")){
+            items.push({...item, type: "Aromatic Fragrant Plants"})
+        }else if (item.quantity > 0 && !items.some((i) => i.name === item.name && i.type === "Insect Repellent Plants")){
+            items.push({...item, type: "Insect Repellent Plants"})
+        }else if (item.quantity > 0 && !items.some((i) => i.name === item.name && i.type === "Medicinal Plants")){
+            items.push({...item, type: "Medicinal Plants"})
+        }else if (item.quantity > 0 && !items.some((i) => i.name === item.name && i.type === "Low Maintenance Plants")){
+            items.push({...item, type: "Low Maintenance Plants"})
+        }
+    });
+    return items;
+  }
+
+  const item = getItems(item.quantity);
 
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
+    let totalCost = 0;
+    if(item.category === "Air Purifying Plants"){
+        items.forEach((item) => {
+            totalCost += item.cost * item.quantity;
+        })
+    }
+    else if(item.category === "Aromatic Fragrant Plants"){
+        items.forEach((item) => {
+            totalCost += item.cost * item.quantity;
+        })
+    }
+    else if(item.category === "Insect Repellent Plants"){
+        items.forEach((item) => {
+            totalCost += item.cost * item.quantity;
+        })
+    }
+    else if(item.category === "Medicinal Plants"){
+        items.forEach((item) => {
+            totalCost += item.cost * item.quantity;
+        })
+    }
+    else if(item.category === "Low Maintenance Plants"){
+        items.forEach((item) => {
+            totalCost += item.cost * item.quantity;
+        })
+    }
+    return totalCost;
   };
 
   return (

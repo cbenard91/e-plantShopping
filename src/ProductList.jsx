@@ -255,6 +255,7 @@ const handlePlantsClick = (e) => {
     e.preventDefault();
     setShowCart(false);
   };
+
     return (
         <div>
              <div className="navbar" style={styleObj}>
