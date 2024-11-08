@@ -7,30 +7,27 @@ export const CartSlice = createSlice({
   },
   reducers: {
     addItem: (state, action) => {
-     const item=action.payload;
-     const existingItem=state.items.find((i)=>i.name===item.id);
-      if(existingItem){
+      const item = action.payload;
+      const existingItem = state.items.find((i) => i.name === item.name); // Compare by 'name' instead of 'id'
+      if (existingItem) {
         existingItem.quantity++;
-      }else{
-        state.items.push({...item,quantity:1});
+      } else {
+        state.items.push({ ...item, quantity: 1 });
       }
     },
     removeItem: (state, action) => {
-      const item=action.payload;
-      const existingItem=state.items.find((i)=>i.name===item.name);
-      if(existingItem){
-        state.items=state.items.filter((i)=>i.name!==item.name);
-      }
+      const { name } = action.payload;
+      state.items = state.items.filter((i) => i.name !== name); // Remove item based on name
     },
     updateQuantity: (state, action) => {
       const { name, quantity } = action.payload;
       const item = state.items.find((i) => i.name === name);
-      item.quantity = quantity;
-      if (item.quantity === 0) {
-        state.items = state.items.filter((i) => i.name !== name);
+      if (item) {
+        item.quantity = quantity > 0 ? quantity : 1; // Ensure quantity is at least 1
+        if (item.quantity === 0) {
+          state.items = state.items.filter((i) => i.name !== name); // Remove item if quantity is 0
+        }
       }
-
-    
     },
   },
 });
