@@ -7,7 +7,7 @@ import { addItem } from './CartSlice';
 function ProductList(props) {
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
-    const [addedToCart, setaddedToCart] = useState([]); // State to store the items added to the cart
+    const [cart, setCart] = useState([]); // State to store the items added to the cart
     const dispatch = useDispatch();
     const cartItems=useSelector(state => state.cart.items);
     console.log(cartItems);
@@ -266,13 +266,13 @@ const handlePlantsClick = (e) => {
     e.preventDefault();
     setShowCart(false);
   };
-    return (
+     return (
         <div>
              <div className="navbar" style={styleObj}>
             <div className="tag">
                <div style={{cursor:"pointer"}} onClick={props.toLanding} className="luxury">
                <img src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png" alt="" />
-               <a href='#' style={{textDecoration:'none'}}>
+               <a style={{textDecoration:'none'}}>
                         <div>
                     <h3 style={{color:'white'}}>Benard's Plant Nursery</h3>
                     <i style={{color:'white'}}>Where Green Meets Serenity</i>
@@ -298,7 +298,7 @@ const handlePlantsClick = (e) => {
                     <h2>{plant.name}</h2>
                     <p>{plant.description}</p>
                     <p>{plant.cost}</p>
-                    <button onClick={()=>handleAddToCart({name:plant.name,cost:plant.cost,image:plant.image})} className='product-button'>Add to Cart</button>
+                    <button style={{backgroundColor:alreadyInCart(plant.name)?"gray":"#615EFC"}} disabled={alreadyInCart(plant.name)? true:false} onClick={()=>handleAddToCart({name:plant.name,cost:plant.cost,image:plant.image})} className='product-button'>Add to Cart</button>
                 </div>)}
                  </div>
             </div>)}

@@ -38,7 +38,7 @@ function App() {
 
       </div>
       <div className={`product-list-container ${showProductList ? 'visible' : ''}`}>
-        <ProductList /*toLanding={handleReturnClick}*//>
+        <ProductList toLanding={handleReturnClick} />
       </div>
     </div>
   );
