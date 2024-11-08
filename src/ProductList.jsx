@@ -9,7 +9,7 @@ function ProductList(props) {
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const [addedToCart, setaddedToCart] = useState([]); // State to store the items added to the cart
-    const [showAboutUs, setShowAboutUs] = useState(false);
+    //const [showAboutUs, setShowAboutUs] = useState(false);
     const dispatch = useDispatch();
     const cartItems=useSelector(state => state.cart.items);
     console.log(cartItems);
@@ -253,18 +253,18 @@ function ProductList(props) {
     textDecoration: 'none',
    }
 
-   const handleClick = () => {
+   /*const handleClick = () => {
     setShowAboutUs(true);
    }
-
+    */
    const handleCartClick = (e) => {
     e.preventDefault();
-    setShowCart(true); // Set showCart to true when cart icon is clicked
+    setShowCart(true); // sets cart visibility to true
 };
 const handlePlantsClick = (e) => {
     e.preventDefault();
-    setShowPlants(true); // Set showAboutUs to true when "About Us" link is clicked
-    setShowCart(false); // Hide the cart when navigating to About Us
+    setShowPlants(true); // sets Plant navigation to true, showing the plant list
+    setShowCart(false); // Hide the cart when navigating to Plant list
 };
 
    const handleContinueShopping = (e) => {
@@ -278,7 +278,7 @@ const handlePlantsClick = (e) => {
             <div className="tag">
                <div style={{cursor:"pointer"}} onClick={props.toLanding} className="luxury">
                <img src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png" alt="" />
-               <a  href='#' onClick={(e) => handleClick(e)} style={{textDecoration:'none'}}>
+               <a href='#' style={{textDecoration:'none'}}>
                         <div>
                     <h3 style={{color:'white'}}>Benard's Plant Nursery</h3>
                     <i style={{color:'white'}}>Where Green Meets Serenity</i>
