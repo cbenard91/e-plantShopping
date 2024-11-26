@@ -6,4 +6,4 @@ const store = configureStore({
         cart: cartReducer,
     },
 });
-export default store
+export default store;
